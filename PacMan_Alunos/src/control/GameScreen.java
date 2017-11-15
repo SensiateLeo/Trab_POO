@@ -124,22 +124,39 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
            Trocar essa parte por uma estrutura mais bem organizada
            Utilizando a classe Stage
         */
-        for (int i = 0; i < Consts.NUM_CELLS; i++) {
-            for (int j = 0; j < Consts.NUM_CELLS; j++) {
-                try {
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "preto.png");
-                    g2.drawImage(newImage,
-                            j * Consts.CELL_SIZE, i * Consts.CELL_SIZE, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(GameScreen.class.getName()).log(Level.SEVERE, null, ex);
+        if(Consts.numBolas !=0){
+            for (int i = 0; i < Consts.NUM_CELLS; i++) {
+                for (int j = 0; j < Consts.NUM_CELLS; j++) {
+                    try {
+                        Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "preto.png");
+                        g2.drawImage(newImage,
+                                j * Consts.CELL_SIZE, i * Consts.CELL_SIZE, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
+        }
+        else{
+             for (int i = 0; i < Consts.NUM_CELLS; i++) {
+                for (int j = 0; j < Consts.NUM_CELLS; j++) {
+                    try {
+                        Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "win.png");
+                        g2.drawImage(newImage,
+                                j * Consts.CELL_SIZE, i * Consts.CELL_SIZE, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(GameScreen.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            
         }
         
         this.controller.drawAllElements(elemArray, g2);
         this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "                            Vidas: " + lolo.vidas + "                            Pontuação: " + lolo.pontuacao);
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "                  Vidas: " + lolo.vidas + "                  Pontuação: " + lolo.pontuacao + "  " + Consts.numBolas);
         
         
         g.dispose();
@@ -162,12 +179,16 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
+            lolo.changeImage("lolo_cima.png");
             lolo.setMovDirection(Pacman.MOVE_UP);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            lolo.changeImage("lolo_baixo.png");
             lolo.setMovDirection(Pacman.MOVE_DOWN);
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            lolo.changeImage("lolo_esq.png");
             lolo.setMovDirection(Pacman.MOVE_LEFT);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            lolo.changeImage("lolo.png");
             lolo.setMovDirection(Pacman.MOVE_RIGHT);
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             lolo.setMovDirection(Pacman.STOP);

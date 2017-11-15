@@ -8,6 +8,7 @@ import elements.Morango;
 import elements.Pacman;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import utils.Consts;
 
 /**
  * Projeto de POO 2017
@@ -40,6 +41,7 @@ public class GameController {
                 if(eTemp.isTransposable()){
                     if(eTemp instanceof Bola) {
                         e.remove(eTemp);
+                        Consts.numBolas = Consts.numBolas - 1;
                         lLolo.pontuacao = lLolo.pontuacao + 10;
                     } 
                     if(eTemp instanceof Morango){

@@ -14,6 +14,7 @@ public class Bola extends Element{
     
     public Bola(String imageName) {
         super(imageName);
+        Consts.numBolas = Consts.numBolas + 1;
         this.isTransposable = true;
     }
 

@@ -54,6 +54,15 @@ public abstract class Element implements Serializable{
         return ("(" + pos.getX() + ", " + pos.getY() + ")");
     }
     
+    public void atravessaCenario(){
+        if(pos.getX() == 0){
+            setPosition(utils.Consts.NUM_CELLS-1, pos.getY());
+        }
+        if(pos.getX() == utils.Consts.NUM_CELLS-1){
+            setPosition(0, pos.getY());
+        }
+    }
+    
     public boolean setPosition(double x, double y) {
         return pos.setPosition(x, y);
     }
