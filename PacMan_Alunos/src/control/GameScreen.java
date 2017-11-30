@@ -5,7 +5,12 @@ import elements.Muro;
 import elements.Pacman;
 import elements.Element;
 import elements.Fantasma;
+import static elements.Fantasma.MOVE_DOWN;
+import static elements.Fantasma.MOVE_LEFT;
+import static elements.Fantasma.MOVE_RIGHT;
+import static elements.Fantasma.MOVE_UP;
 import elements.Morango;
+import elements.PowerPellet;
 import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
@@ -32,28 +37,29 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
     long tempoInicio = System.currentTimeMillis();
     
     private final Pacman lolo;
+    private final Fantasma lulu;
     private final ArrayList<Element> elemArray;
     private final GameController controller = new GameController();
     private char map1[][]= {
         {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'},
-        {'#','.','.','.','.','.','.','.','.','#','#','.','.','.','.','.','.','.','.','#'},
+        {'#','.','.','.','.','.','.','.','.','#','#','.','.','.','.','.','.','.','*','#'},
         {'#','.','#','.','#','#','#','#','.','#','#','.','#','.','#','#','.','#','.','#'},
         {'#','.','#','.','.','.','.','.','.','#','#','.','#','.','#','#','.','#','.','#'},
         {'#','.','#','.','#','.','#','.','.','.','.','.','.','.','.','.','.','#','.','#'},
         {'#','.','#','.','#','.','#','.','#','#','#','#','.','.','#','#','.','#','.','#'},
         {'#','.','#','.','#','.','#','.','#','x','x','#','.','.','#','#','.','#','.','#'},
         {'.','.','#','.','#','.','#','.','#','x','x','#','.','.','.','.','.','#','.','.'},
-        {'#','.','#','.','#','.','#','.','#','#','#','#','.','#','.','#','.','#','.','#'},
+        {'#','.','#','.','#','.','#','.','#','#','#','#','.','#','*','#','.','#','.','#'},
         {'#','.','.','.','.','.','.','.','.','.','.','.','.','#','.','#','.','#','.','#'},
         {'#','#','.','#','#','.','#','.','.','#','#','.','.','.','.','.','.','.','.','#'},
         {'#','#','.','#','#','.','#','.','#','#','#','#','.','#','#','#','.','#','.','#'},
         {'#','#','.','#','#','.','#','.','.','.','.','.','.','#','#','#','.','#','.','#'},
         {'#','#','.','#','#','.','.','.','.','.','.','.','.','.','.','.','.','#','.','#'},
         {'#','.','.','.','#','.','#','#','.','#','#','.','#','.','#','#','.','#','.','#'},
-        {'#','.','#','.','#','.','#','#','.','.','.','.','#','.','#','#','.','.','.','#'},
+        {'#','.','#','.','#','.','#','#','.','*','.','.','#','.','#','#','.','.','.','#'},
         {'.','.','#','.','#','.','.','.','.','#','#','.','#','.','#','#','.','#','.','.'},
         {'#','.','#','.','#','.','#','#','.','#','#','.','.','.','#','#','.','#','.','#'},
-        {'#','.','.','.','.','.','.','.','.','#','#','.','.','.','.','.','.','.','.','#'},
+        {'#','*','.','.','.','.','.','.','.','#','#','.','.','.','.','.','.','.','.','#'},
         {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'}
     };
 
@@ -78,9 +84,9 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
             for (int j = 0; j < Consts.NUM_CELLS; j++) {
                 if(map1[i][j] == '#')
                 {
-                    Muro skull = new Muro("wall.png");
-                    skull.setPosition(i, j);
-                    this.addElement(skull);
+                    Muro muro = new Muro("wall.png");
+                    muro.setPosition(i, j);
+                    this.addElement(muro);
                 }
                 if(map1[i][j] == '.')
                 {
@@ -88,20 +94,18 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                     bolinha.setPosition(i, j);
                     this.addElement(bolinha);
                 }
-                if(map1[i][j] == '.')
+                if(map1[i][j] == '*')
                 {
-                    Bola bolinha = new Bola("dot.png");
-                    bolinha.setPosition(i, j);
-                    this.addElement(bolinha);
-                }
-                if(map1[i][j] == 'x')
-                {
-                    Fantasma lulu = new Fantasma("fantasma.png");
-                    lulu.setPosition(i,j);
-                    this.addElement(lulu);
+                    PowerPellet pellet = new PowerPellet("power.png");
+                    pellet.setPosition(i, j);
+                    this.addElement(pellet);
                 }
             }
         }
+        
+        lulu = new Fantasma("fantasma.png");
+        lulu.setPosition(9, 9);
+        this.addElement(lulu);
            
     }
     
@@ -119,11 +123,7 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         
         /*Criamos um contexto grafico*/
         Graphics g2 = g.create(getInsets().right, getInsets().top, getWidth() - getInsets().left, getHeight() - getInsets().bottom);
-        
-        /* DESENHA CENARIO
-           Trocar essa parte por uma estrutura mais bem organizada
-           Utilizando a classe Stage
-        */
+
         if(Consts.numBolas !=0){
             for (int i = 0; i < Consts.NUM_CELLS; i++) {
                 for (int j = 0; j < Consts.NUM_CELLS; j++) {
@@ -131,6 +131,10 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
                         Image newImage = Toolkit.getDefaultToolkit().getImage(new java.io.File(".").getCanonicalPath() + Consts.PATH + "preto.png");
                         g2.drawImage(newImage,
                                 j * Consts.CELL_SIZE, i * Consts.CELL_SIZE, Consts.CELL_SIZE, Consts.CELL_SIZE, null);
+                        if(lolo.comeFantasma == true){
+                            lulu.changeImage("comida.png");
+                            lulu.setMortal(true);
+                        }
 
                     } catch (IOException ex) {
                         Logger.getLogger(GameScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -155,8 +159,9 @@ public class GameScreen extends javax.swing.JFrame implements KeyListener {
         }
         
         this.controller.drawAllElements(elemArray, g2);
-        this.controller.processAllElements(elemArray);
-        this.setTitle("-> Cell: " + lolo.getStringPosition() + "                  Vidas: " + lolo.vidas + "                  Pontuação: " + lolo.pontuacao + "  " + Consts.numBolas);
+        this.controller.drawDynamicElements(elemArray, g2);
+        this.controller.processAllElements(elemArray, lolo, lulu);
+        this.setTitle("-> Cell: " + lolo.getStringPosition() + "                  Vidas: " + lolo.vidas + "                  Pontuação: " + lolo.pontuacao);
         
         
         g.dispose();

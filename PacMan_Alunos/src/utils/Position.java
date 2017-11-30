@@ -61,9 +61,20 @@ public class Position implements Serializable {
         return this.setPosition(this.getX()+Consts.WALK_STEP, this.getY());
     }
     public boolean moveRight(){
-        return this.setPosition(this.getX(), this.getY()+Consts.WALK_STEP);
+        if(getY() == 19){
+            return this.setPosition(this.getX(), 0);
+        }
+        else{
+            return this.setPosition(this.getX(), this.getY()+Consts.WALK_STEP);
+        }
+        
     }
     public boolean moveLeft(){
-        return this.setPosition(this.getX(), this.getY()-Consts.WALK_STEP);        
+        if(getY() == 0){
+            return this.setPosition(this.getX(), 19);
+        }
+        else{
+            return this.setPosition(this.getX(), this.getY()-Consts.WALK_STEP);  
+        }
     }
 }

@@ -28,6 +28,8 @@ public class Pacman extends Element  implements Serializable{
     
     private int movDirection = STOP;
     
+    public boolean comeFantasma = false;
+    
     public Pacman(String imageName) {
         super(imageName);
     }

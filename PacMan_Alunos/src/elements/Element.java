@@ -74,6 +74,14 @@ public abstract class Element implements Serializable{
     public void setTransposable(boolean isTransposable) {
         this.isTransposable = isTransposable;
     }
+    
+    public boolean isMortal() {
+        return isMortal;
+    }
+    
+    public void setMortal(boolean isTransposable) {
+        this.isMortal = isTransposable;
+    }
 
     abstract public void autoDraw(Graphics g);
 

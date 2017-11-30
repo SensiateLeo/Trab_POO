@@ -6,6 +6,7 @@ import elements.Element;
 import elements.Fantasma;
 import elements.Morango;
 import elements.Pacman;
+import elements.PowerPellet;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import utils.Consts;
@@ -20,47 +21,87 @@ public class GameController {
     
     public void drawAllElements(ArrayList<Element> elemArray, Graphics g){
         for(int i=0; i<elemArray.size(); i++){
-            elemArray.get(i).autoDraw(g);
+            if (elemArray.get(i) instanceof Pacman || elemArray.get(i) instanceof Fantasma){
+                continue;
+            }
+            else{
+                elemArray.get(i).autoDraw(g);
+            }
         }
     }
-    public void processAllElements(ArrayList<Element> e){
+    public void drawDynamicElements(ArrayList<Element> elemArray, Graphics g){
+        
+        for(int i=0; i<elemArray.size(); i++){
+            if (elemArray.get(i) instanceof Pacman || elemArray.get(i) instanceof Fantasma){
+                elemArray.get(i).autoDraw(g);
+            }
+        }
+    }
+    
+    public void processAllElements(ArrayList<Element> e, Pacman pacman, Fantasma ghost){
         if(e.isEmpty())
             return;
         
-        Pacman lLolo = (Pacman)e.get(0);
-        if (!isValidPosition(e, lLolo)) {
-            lLolo.backToLastPosition();
-            lLolo.setMovDirection(Pacman.STOP);
+        Element eTemp;
+        
+        for(int i = 1; i < e.size(); i++){
+            eTemp = e.get(i);
+            if(eTemp instanceof Fantasma){
+                break;
+            }
+        }
+        
+        if (!isValidPosition(e, pacman)) {
+            pacman.backToLastPosition();
+            pacman.setMovDirection(Pacman.STOP);
             return;
         }
         
-        Element eTemp;
+        if (!isValidPosition(e, ghost)) {
+            ghost.backToLastPosition();
+            ghost.setMovDirection(Pacman.STOP);
+            return;
+        }
+        
+        
         for(int i = 1; i < e.size(); i++){
             eTemp = e.get(i);
-            if(lLolo.overlap(eTemp)){
+            if(pacman.overlap(eTemp)){
                 if(eTemp.isTransposable()){
                     if(eTemp instanceof Bola) {
                         e.remove(eTemp);
                         Consts.numBolas = Consts.numBolas - 1;
-                        lLolo.pontuacao = lLolo.pontuacao + 10;
+                        pacman.pontuacao = pacman.pontuacao + 10;
                     } 
                     if(eTemp instanceof Morango){
                         e.remove(eTemp);
-                        lLolo.pontuacao = lLolo.pontuacao + 300;
+                        pacman.pontuacao = pacman.pontuacao + 300;
                     }
                     if(eTemp instanceof Cereja){
                         e.remove(eTemp);
-                        lLolo.pontuacao = lLolo.pontuacao + 100;
+                        pacman.pontuacao = pacman.pontuacao + 100;
                     }
+                    if(eTemp instanceof PowerPellet) {
+                        e.remove(eTemp);
+                        pacman.pontuacao = pacman.pontuacao + 10;
+                        pacman.comeFantasma = true;
+                    } 
                     if(eTemp instanceof Fantasma){
-                        lLolo.vidas = lLolo.vidas - 1;
-                        lLolo.setPosition(1, 1);
+                        if(eTemp.isMortal()== false){
+                            pacman.vidas = pacman.vidas - 1;
+                            pacman.setPosition(1, 1);
+                        }
+                        else{
+                            e.remove(eTemp);
+                            pacman.pontuacao = pacman.pontuacao + 200;
+                        }
                     }
                 }
             }
         }
         
-        lLolo.move();
+        pacman.move();
+        ghost.move();
     }
     public boolean isValidPosition(ArrayList<Element> elemArray, Element elem){
         Element elemAux;
