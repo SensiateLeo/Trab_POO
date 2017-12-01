@@ -10,8 +10,7 @@ import java.io.File;
  */
 public class Consts {
     public static final int CELL_SIZE = 28;
-    public static final int NUM_CELLS = 20;
-    
+    public static final int NUM_CELLS = 22;
     public static final int WALK_STEP_DEC_PLACES = 2;
     public static final double WALK_STEP = 0.1;
     

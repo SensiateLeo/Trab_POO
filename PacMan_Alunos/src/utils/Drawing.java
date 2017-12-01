@@ -1,6 +1,6 @@
 package utils;
 
-import control.GameScreen;
+import control.Stage;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
@@ -11,13 +11,13 @@ import javax.swing.ImageIcon;
  * Baseado em material do Prof. Jose Fernando Junior
  */
 public class Drawing {
-    static GameScreen screen;
+    static Stage screen;
 
-    public static GameScreen getGameScreen() {
+    public static Stage getGameScreen() {
         return screen;
     }
 
-    public static void setGameScreen(GameScreen newScreen) {
+    public static void setGameScreen(Stage newScreen) {
         screen = newScreen;
     }    
     public static void draw(Graphics g, ImageIcon imageIcon, double y, double x) {
