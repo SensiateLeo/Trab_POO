@@ -61,7 +61,7 @@ public class Position implements Serializable {
         return this.setPosition(this.getX()+Consts.WALK_STEP, this.getY());
     }
     public boolean moveRight(){
-        if(getY() == 19){
+        if(getY() == 21){
             return this.setPosition(this.getX(), 0);
         }
         else{
@@ -71,7 +71,7 @@ public class Position implements Serializable {
     }
     public boolean moveLeft(){
         if(getY() == 0){
-            return this.setPosition(this.getX(), 19);
+            return this.setPosition(this.getX(), 21);
         }
         else{
             return this.setPosition(this.getX(), this.getY()-Consts.WALK_STEP);  

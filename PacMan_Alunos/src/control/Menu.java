@@ -5,6 +5,8 @@
  */
 package control;
 
+import utils.Music;
+
 /**
  *
  * @author Leonardo Sensiate
@@ -61,6 +63,11 @@ public class Menu extends javax.swing.JFrame {
         jBsair.setBackground(new java.awt.Color(255, 255, 0));
         jBsair.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jBsair.setText("Sair");
+        jBsair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPmenuLayout = new javax.swing.GroupLayout(jPmenu);
         jPmenu.setLayout(jPmenuLayout);
@@ -137,13 +144,19 @@ public class Menu extends javax.swing.JFrame {
 
     private void jBjogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBjogarActionPerformed
 
-        GameScreen screen = new GameScreen();
+        Stage screen = new Stage();
+        Music menu = new Music();
+        menu.executaLoop(menu.retornaCaminho("pacman_beginning.wav"));
         screen.setVisible(true);
         screen.createBufferStrategy(2);
         screen.go();
         jPmenu.setVisible(false);
         jPingame.setVisible(true);
     }//GEN-LAST:event_jBjogarActionPerformed
+
+    private void jBsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsairActionPerformed
+
+    }//GEN-LAST:event_jBsairActionPerformed
 
     /**
      * @param args the command line arguments
