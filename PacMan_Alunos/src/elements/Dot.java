@@ -1,27 +1,24 @@
 package elements;
 
+import utils.Consts;
 import utils.Drawing;
 import java.awt.Graphics;
-import java.io.Serializable;
 
 /**
  * Projeto de POO 2017
  * 
- * @author Luiz Eduardo
- * Baseado em material do Prof. Jose Fernando Junior
+ * @authors Hiago de Franco, Leonardo Sensiate, Mateus Castilho Leite e Vinícius Nakasone.
+ * Baseado em material do Prof. Jose Fernando Junior disponibilizado pelo professor Luiz Eduardo.
  */
-public class Dot extends Element implements Serializable{
-
+public class Dot extends Element{
+    
     public Dot(String imageName) {
         super(imageName);
-        this.isMortal = true;
+        Consts.numDots = Consts.numDots + 1;
+        this.isTransposable = true;
     }
 
-    @Override
     public void autoDraw(Graphics g) {
         Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
-        if(!this.moveRight())
-            Drawing.getGameScreen().removeElement(this);
-    }
-    
+    }    
 }
