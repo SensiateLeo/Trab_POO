@@ -18,8 +18,8 @@ import utils.Consts;
 import utils.Drawing;
 
 /**
- *
- * @author Leonardo Sensiate
+ * @authors Hiago de Franco, Leonardo Sensiate, Mateus Castilho Leite e Vinícius Nakasone.
+ * Baseado em material do Prof. Jose Fernando Junior disponibilizado pelo professor Luiz Eduardo.
  */
 public class Fantasma extends Element{
     
@@ -30,12 +30,22 @@ public class Fantasma extends Element{
     public static final int MOVE_DOWN = 4;
 
     private int movDirection = STOP;
+    private boolean isVivo;
 
     public Fantasma(String imageName) {
         super(imageName);
         this.isMortal = false;
+        this.isVivo = true;
     }
 
+    public void setVivo(boolean vivo){
+        isVivo = vivo;
+    }
+    
+    public boolean getVivo(){
+        return isVivo;
+    }
+    
     public void autoDraw(Graphics g) {
         Drawing.draw(g, this.imageIcon, pos.getY(), pos.getX());
     }  
@@ -46,6 +56,12 @@ public class Fantasma extends Element{
     
     public void setMovDirection(int direction) {
         movDirection = direction;
+    }
+    
+    public double distElem(Element pac){
+        double dist;
+        dist = (pos.getX() - pac.pos.getX())*(pos.getX() - pac.pos.getX()) + (pos.getY() - pac.pos.getY())*(pos.getY() - pac.pos.getY());
+        return dist;
     }
     
     public void changeImage(String imageName){

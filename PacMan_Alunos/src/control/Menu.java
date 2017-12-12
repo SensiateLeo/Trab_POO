@@ -5,9 +5,13 @@
  */
 package control;
 
+import elements.Pacman;
+import utils.Consts;
+import utils.Music;
+
 /**
- *
- * @author Leonardo Sensiate
+ * @authors Hiago de Franco, Leonardo Sensiate, Mateus Castilho Leite e Vinícius Nakasone.
+ * Baseado em material do Prof. Jose Fernando Junior disponibilizado pelo professor Luiz Eduardo.
  */
 public class Menu extends javax.swing.JFrame {
 
@@ -17,6 +21,8 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         jPmenu.setVisible(true);
+        jPperdeu.setVisible(false);
+        jPcreditos.setVisible(false);
     }
 
     /**
@@ -32,9 +38,18 @@ public class Menu extends javax.swing.JFrame {
         jBjogar = new javax.swing.JButton();
         jLtitulo = new javax.swing.JLabel();
         jBcontinuar = new javax.swing.JButton();
-        jBsair = new javax.swing.JButton();
-        jPingame = new javax.swing.JPanel();
-        jLingame = new javax.swing.JLabel();
+        jBcreditos = new javax.swing.JButton();
+        jPperdeu = new javax.swing.JPanel();
+        jLperdeu = new javax.swing.JLabel();
+        jBperdeu = new javax.swing.JButton();
+        jPcreditos = new javax.swing.JPanel();
+        jLcreditos = new javax.swing.JLabel();
+        jLproducao = new javax.swing.JLabel();
+        jLsense8 = new javax.swing.JLabel();
+        jLteteu = new javax.swing.JLabel();
+        jLvivi = new javax.swing.JLabel();
+        jLhiago = new javax.swing.JLabel();
+        jBbackMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,64 +72,170 @@ public class Menu extends javax.swing.JFrame {
         jBcontinuar.setBackground(new java.awt.Color(255, 255, 0));
         jBcontinuar.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jBcontinuar.setText("Continuar");
+        jBcontinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcontinuarActionPerformed(evt);
+            }
+        });
 
-        jBsair.setBackground(new java.awt.Color(255, 255, 0));
-        jBsair.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        jBsair.setText("Sair");
+        jBcreditos.setBackground(new java.awt.Color(255, 255, 0));
+        jBcreditos.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jBcreditos.setText("Créditos");
+        jBcreditos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBcreditosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPmenuLayout = new javax.swing.GroupLayout(jPmenu);
         jPmenu.setLayout(jPmenuLayout);
         jPmenuLayout.setHorizontalGroup(
             jPmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPmenuLayout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(jPmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPmenuLayout.createSequentialGroup()
-                        .addComponent(jLtitulo)
-                        .addGap(81, 81, 81))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPmenuLayout.createSequentialGroup()
-                        .addGroup(jPmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jBcontinuar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBjogar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBsair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(128, 128, 128))))
+                    .addGroup(jPmenuLayout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addGroup(jPmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBcreditos, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBcontinuar)
+                            .addComponent(jBjogar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPmenuLayout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jLtitulo)))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         jPmenuLayout.setVerticalGroup(
             jPmenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPmenuLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(40, 40, 40)
                 .addComponent(jLtitulo)
-                .addGap(31, 31, 31)
+                .addGap(32, 32, 32)
                 .addComponent(jBjogar)
                 .addGap(18, 18, 18)
                 .addComponent(jBcontinuar)
                 .addGap(18, 18, 18)
-                .addComponent(jBsair)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jBcreditos)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        jPingame.setBackground(new java.awt.Color(0, 0, 0));
+        jPperdeu.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLingame.setBackground(new java.awt.Color(0, 0, 0));
-        jLingame.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        jLingame.setForeground(new java.awt.Color(255, 255, 255));
-        jLingame.setText("Jogo em andamento...");
+        jLperdeu.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        jLperdeu.setForeground(new java.awt.Color(255, 255, 0));
+        jLperdeu.setText("Você Perdeu!");
 
-        javax.swing.GroupLayout jPingameLayout = new javax.swing.GroupLayout(jPingame);
-        jPingame.setLayout(jPingameLayout);
-        jPingameLayout.setHorizontalGroup(
-            jPingameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPingameLayout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addComponent(jLingame)
-                .addGap(61, 61, 61))
+        jBperdeu.setBackground(new java.awt.Color(255, 255, 0));
+        jBperdeu.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jBperdeu.setText("Voltar ao Menu Principal");
+        jBperdeu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBperdeuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPperdeuLayout = new javax.swing.GroupLayout(jPperdeu);
+        jPperdeu.setLayout(jPperdeuLayout);
+        jPperdeuLayout.setHorizontalGroup(
+            jPperdeuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPperdeuLayout.createSequentialGroup()
+                .addGroup(jPperdeuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPperdeuLayout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(jLperdeu))
+                    .addGroup(jPperdeuLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(jBperdeu)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
-        jPingameLayout.setVerticalGroup(
-            jPingameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPingameLayout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jLingame)
-                .addContainerGap(137, Short.MAX_VALUE))
+        jPperdeuLayout.setVerticalGroup(
+            jPperdeuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPperdeuLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLperdeu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addComponent(jBperdeu)
+                .addGap(64, 64, 64))
+        );
+
+        jPcreditos.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLcreditos.setBackground(new java.awt.Color(0, 0, 0));
+        jLcreditos.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        jLcreditos.setForeground(new java.awt.Color(255, 255, 0));
+        jLcreditos.setText("CRÉDITOS");
+
+        jLproducao.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLproducao.setForeground(new java.awt.Color(255, 255, 0));
+        jLproducao.setText("Produzido por:");
+
+        jLsense8.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLsense8.setForeground(new java.awt.Color(255, 255, 255));
+        jLsense8.setText("Leonardo Sensiate    nºUSP: 9771571");
+
+        jLteteu.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLteteu.setForeground(new java.awt.Color(255, 255, 255));
+        jLteteu.setText("Mateus C. Leite      nºUSP: 9771550");
+
+        jLvivi.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLvivi.setForeground(new java.awt.Color(255, 255, 255));
+        jLvivi.setText("Vinícius Nakasone    nºUSP: 9771612");
+
+        jLhiago.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        jLhiago.setForeground(new java.awt.Color(255, 255, 255));
+        jLhiago.setText("Hiago De Franco      nºUSP: 9771289");
+
+        jBbackMenu.setBackground(new java.awt.Color(255, 255, 0));
+        jBbackMenu.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jBbackMenu.setText("Voltar ao Menu Principal");
+        jBbackMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbackMenuActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPcreditosLayout = new javax.swing.GroupLayout(jPcreditos);
+        jPcreditos.setLayout(jPcreditosLayout);
+        jPcreditosLayout.setHorizontalGroup(
+            jPcreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPcreditosLayout.createSequentialGroup()
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addGroup(jPcreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPcreditosLayout.createSequentialGroup()
+                        .addGroup(jPcreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLhiago)
+                            .addComponent(jLvivi)
+                            .addComponent(jLteteu)
+                            .addComponent(jLsense8))
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPcreditosLayout.createSequentialGroup()
+                        .addGroup(jPcreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLcreditos)
+                            .addGroup(jPcreditosLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLproducao)))
+                        .addGap(128, 128, 128))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPcreditosLayout.createSequentialGroup()
+                        .addComponent(jBbackMenu)
+                        .addGap(120, 120, 120))))
+        );
+        jPcreditosLayout.setVerticalGroup(
+            jPcreditosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPcreditosLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLcreditos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLproducao)
+                .addGap(18, 18, 18)
+                .addComponent(jLhiago)
+                .addGap(18, 18, 18)
+                .addComponent(jLsense8)
+                .addGap(18, 18, 18)
+                .addComponent(jLteteu)
+                .addGap(18, 18, 18)
+                .addComponent(jLvivi)
+                .addGap(18, 18, 18)
+                .addComponent(jBbackMenu)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,13 +244,17 @@ public class Menu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPmenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPingame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPperdeu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPcreditos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPmenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPingame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPperdeu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPcreditos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,13 +262,41 @@ public class Menu extends javax.swing.JFrame {
 
     private void jBjogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBjogarActionPerformed
 
-        GameScreen screen = new GameScreen();
+        Stage screen = new Stage();
+        Music menu = new Music();
+        menu.executaLoop(menu.retornaCaminho("pacman_beginning.wav"));
         screen.setVisible(true);
         screen.createBufferStrategy(2);
         screen.go();
+        this.setVisible(false);
         jPmenu.setVisible(false);
-        jPingame.setVisible(true);
+        jPperdeu.setVisible(true);
+        jPcreditos.setVisible(false);
     }//GEN-LAST:event_jBjogarActionPerformed
+
+    
+    private void jBcreditosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcreditosActionPerformed
+        jPmenu.setVisible(false);
+        jPperdeu.setVisible(false);
+        jPcreditos.setVisible(true);
+    }//GEN-LAST:event_jBcreditosActionPerformed
+
+    
+    private void jBcontinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcontinuarActionPerformed
+        
+    }//GEN-LAST:event_jBcontinuarActionPerformed
+
+    private void jBperdeuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBperdeuActionPerformed
+        jPmenu.setVisible(true);
+        jPcreditos.setVisible(false);
+        jPperdeu.setVisible(false);
+    }//GEN-LAST:event_jBperdeuActionPerformed
+
+    private void jBbackMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbackMenuActionPerformed
+        jPmenu.setVisible(true);
+        jPcreditos.setVisible(false);
+        jPperdeu.setVisible(false);
+    }//GEN-LAST:event_jBbackMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,12 +337,21 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBbackMenu;
     private javax.swing.JButton jBcontinuar;
+    private javax.swing.JButton jBcreditos;
     private javax.swing.JButton jBjogar;
-    private javax.swing.JButton jBsair;
-    private javax.swing.JLabel jLingame;
+    private javax.swing.JButton jBperdeu;
+    private javax.swing.JLabel jLcreditos;
+    private javax.swing.JLabel jLhiago;
+    private javax.swing.JLabel jLperdeu;
+    private javax.swing.JLabel jLproducao;
+    private javax.swing.JLabel jLsense8;
+    private javax.swing.JLabel jLteteu;
     private javax.swing.JLabel jLtitulo;
-    private javax.swing.JPanel jPingame;
+    private javax.swing.JLabel jLvivi;
+    private javax.swing.JPanel jPcreditos;
     private javax.swing.JPanel jPmenu;
+    private javax.swing.JPanel jPperdeu;
     // End of variables declaration//GEN-END:variables
 }

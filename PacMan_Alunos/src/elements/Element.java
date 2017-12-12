@@ -12,8 +12,8 @@ import javax.swing.ImageIcon;
 /**
  * Projeto de POO 2017
  * 
- * @author Luiz Eduardo
- * Baseado em material do Prof. Jose Fernando Junior
+ * @authors Hiago de Franco, Leonardo Sensiate, Mateus Castilho Leite e Vinícius Nakasone.
+ * Baseado em material do Prof. Jose Fernando Junior disponibilizado pelo professor Luiz Eduardo.
  */
 public abstract class Element implements Serializable{
 
@@ -54,15 +54,6 @@ public abstract class Element implements Serializable{
         return ("(" + pos.getX() + ", " + pos.getY() + ")");
     }
     
-    public void atravessaCenario(){
-        if(pos.getX() == 0){
-            setPosition(utils.Consts.NUM_CELLS-1, pos.getY());
-        }
-        if(pos.getX() == utils.Consts.NUM_CELLS-1){
-            setPosition(0, pos.getY());
-        }
-    }
-    
     public boolean setPosition(double x, double y) {
         return pos.setPosition(x, y);
     }
@@ -86,18 +77,48 @@ public abstract class Element implements Serializable{
     abstract public void autoDraw(Graphics g);
 
     public boolean moveUp() {
-        return this.pos.moveUp();
+        if(isMortal() == false){
+            return this.pos.moveUp();
+        }
+        else{
+            return this.setPosition(this.pos.getX()-Consts.WALK_STEP_MORTAL, this.pos.getY());
+        }
     }
 
     public boolean moveDown() {
-        return this.pos.moveDown();
+        if(isMortal() == false){
+            return this.pos.moveDown();
+        }
+        else{
+            return this.setPosition(this.pos.getX()+Consts.WALK_STEP_MORTAL, this.pos.getY());
+        }
     }
 
     public boolean moveRight() {
-        return this.pos.moveRight();
+        if(isMortal() == false){
+            return this.pos.moveRight();
+        }
+        else{
+            if(this.pos.getY() == 21){
+                return this.setPosition(this.pos.getX(), 0);
+            }
+            else{
+                return this.setPosition(this.pos.getX(), this.pos.getY()+Consts.WALK_STEP_MORTAL);
+            }
+        }   
     }
 
     public boolean moveLeft() {
-        return this.pos.moveLeft();
+        if(isMortal() == false){
+            return this.pos.moveLeft();
+        }
+        else{
+            if(this.pos.getY() == 0){
+                return this.setPosition(this.pos.getX(), 21);
+            }
+            else{
+                return this.setPosition(this.pos.getX(), this.pos.getY()-Consts.WALK_STEP_MORTAL);  
+            }
+        }
     }
 }

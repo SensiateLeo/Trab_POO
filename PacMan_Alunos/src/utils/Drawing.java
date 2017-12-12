@@ -1,23 +1,23 @@
 package utils;
 
-import control.GameScreen;
+import control.Stage;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 /**
  * Projeto de POO 2017
  * 
- * @author Luiz Eduardo
- * Baseado em material do Prof. Jose Fernando Junior
+ * @authors Hiago de Franco, Leonardo Sensiate, Mateus Castilho Leite e Vinícius Nakasone.
+ * Baseado em material do Prof. Jose Fernando Junior disponibilizado pelo professor Luiz Eduardo.
  */
 public class Drawing {
-    static GameScreen screen;
+    static Stage screen;
 
-    public static GameScreen getGameScreen() {
+    public static Stage getGameScreen() {
         return screen;
     }
 
-    public static void setGameScreen(GameScreen newScreen) {
+    public static void setGameScreen(Stage newScreen) {
         screen = newScreen;
     }    
     public static void draw(Graphics g, ImageIcon imageIcon, double y, double x) {

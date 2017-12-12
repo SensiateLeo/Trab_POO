@@ -12,8 +12,8 @@ import utils.Consts;
 /**
  * Projeto de POO 2017
  * 
- * @author Luiz Eduardo
- * Baseado em material do Prof. Jose Fernando Junior
+ * @authors Hiago de Franco, Leonardo Sensiate, Mateus Castilho Leite e Vinícius Nakasone.
+ * Baseado em material do Prof. Jose Fernando Junior disponibilizado pelo professor Luiz Eduardo.
  */
 public class Pacman extends Element  implements Serializable{
     
@@ -24,7 +24,7 @@ public class Pacman extends Element  implements Serializable{
     public static final int MOVE_DOWN = 4;
     
     public int pontuacao = 0;
-    public int vidas = 3;
+    public int controleVidas;
     
     private int movDirection = STOP;
     
