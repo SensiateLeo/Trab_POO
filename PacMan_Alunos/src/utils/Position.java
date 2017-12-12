@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * Projeto de POO 2017
  * 
- * @author Luiz Eduardo
- * Baseado em material do Prof. Jose Fernando Junior
+* @authors Hiago de Franco, Leonardo Sensiate, Mateus Castilho Leite e Vinícius Nakasone.
+ * Baseado em material do Prof. Jose Fernando Junior disponibilizado pelo professor Luiz Eduardo.
  */
 public class Position implements Serializable {
     /* Elements are positioned in a grid layout (integers).
@@ -55,26 +55,26 @@ public class Position implements Serializable {
     }
     
     public boolean moveUp(){
-        return this.setPosition(this.getX()-Consts.WALK_STEP, this.getY());
+        return this.setPosition(this.getX()-Consts.WALK_STEP_NORMAL, this.getY());
     }
     public boolean moveDown(){
-        return this.setPosition(this.getX()+Consts.WALK_STEP, this.getY());
+        return this.setPosition(this.getX()+Consts.WALK_STEP_NORMAL, this.getY());
     }
     public boolean moveRight(){
-        if(getY() == 19){
+        if(getY() == 21){
             return this.setPosition(this.getX(), 0);
         }
         else{
-            return this.setPosition(this.getX(), this.getY()+Consts.WALK_STEP);
+            return this.setPosition(this.getX(), this.getY()+Consts.WALK_STEP_NORMAL);
         }
         
     }
     public boolean moveLeft(){
         if(getY() == 0){
-            return this.setPosition(this.getX(), 19);
+            return this.setPosition(this.getX(), 21);
         }
         else{
-            return this.setPosition(this.getX(), this.getY()-Consts.WALK_STEP);  
+            return this.setPosition(this.getX(), this.getY()-Consts.WALK_STEP_NORMAL);  
         }
     }
 }
